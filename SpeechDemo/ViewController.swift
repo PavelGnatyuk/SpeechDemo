@@ -17,15 +17,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
-    let request = SFSpeechAudioBufferRecognitionRequest()
+    var request:SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         speechRecognizer?.delegate = self
-        request.shouldReportPartialResults = true
-                
+        
         switch SFSpeechRecognizer.authorizationStatus() {
         case .notDetermined:
             askSpeechPermission()
@@ -44,8 +43,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     @IBAction func buttonTalkClicked(_ sender: Any) {
-        //textView.text += " Text for a test "
-        recognize()
+        textView.text = ""
+        startListening()
     }
     
     @IBAction func buttonStopClicked(_ sender: Any) {
@@ -79,10 +78,17 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
-    func recognize() {
+    func startListening() {
+        debugPrint("\(#function)")
+        request = SFSpeechAudioBufferRecognitionRequest()
+        guard let request = request else {
+            return
+        }
+        request.shouldReportPartialResults = true
+
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
         audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, time) in
-            self.request.append(buffer)
+            self.request?.append(buffer)
         }
 
         audioEngine.prepare()
