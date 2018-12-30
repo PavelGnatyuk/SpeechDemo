@@ -7,14 +7,29 @@
 //
 
 import UIKit
+import Speech
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var buttonTalk: UIButton!
+    @IBOutlet weak var buttonClear: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    @IBAction func buttonClearClicked(_ sender: Any) {
+        textView.text = ""
+    }
+    
+    @IBAction func buttonTalkClicked(_ sender: Any) {
+        textView.text += " Text for a test "
+    }
+    
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        debugPrint("Available: \(available)")
+    }
 }
 

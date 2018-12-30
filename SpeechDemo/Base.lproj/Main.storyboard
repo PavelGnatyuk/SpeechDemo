@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,57 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SpeechDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-J0-wup">
+                                <rect key="frame" x="16" y="93" width="343" height="554"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyI-aW-Is4">
+                                <rect key="frame" x="323" y="46" width="36" height="30"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="buttonClearClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LTZ-R7-qy3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-8D-WQ0">
+                                <rect key="frame" x="16" y="46" width="30" height="30"/>
+                                <state key="normal" title="Talk"/>
+                                <connections>
+                                    <action selector="buttonTalkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xna-Aq-fkk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="gjD-J0-wup" secondAttribute="leading" id="30R-P6-eNl"/>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="A76-fA-2cg"/>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="baseline" secondItem="dyI-aW-Is4" secondAttribute="baseline" id="Fva-oS-GTL"/>
+                            <constraint firstItem="gjD-J0-wup" firstAttribute="top" secondItem="oM6-8D-WQ0" secondAttribute="bottom" constant="17" id="GyH-12-ALD"/>
+                            <constraint firstAttribute="bottom" secondItem="gjD-J0-wup" secondAttribute="bottom" constant="20" symbolic="YES" id="SDn-8m-dor"/>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="UHv-dY-GCE"/>
+                            <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="gjD-J0-wup" secondAttribute="trailing" id="WBt-3v-J3w"/>
+                            <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="pXc-0j-iYJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonClear" destination="dyI-aW-Is4" id="7SK-fN-vwE"/>
+                        <outlet property="buttonTalk" destination="oM6-8D-WQ0" id="j3H-ZT-u9s"/>
+                        <outlet property="textView" destination="gjD-J0-wup" id="gEY-BU-UG2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
