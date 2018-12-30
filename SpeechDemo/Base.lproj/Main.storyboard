@@ -18,6 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-8D-WQ0">
+                                <rect key="frame" x="16" y="46" width="30" height="30"/>
+                                <state key="normal" title="Talk"/>
+                                <connections>
+                                    <action selector="buttonTalkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xna-Aq-fkk"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-J0-wup">
                                 <rect key="frame" x="16" y="93" width="343" height="554"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,23 +41,25 @@
                                     <action selector="buttonClearClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LTZ-R7-qy3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-8D-WQ0">
-                                <rect key="frame" x="16" y="46" width="30" height="30"/>
-                                <state key="normal" title="Talk"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWK-yx-dEY">
+                                <rect key="frame" x="75" y="46" width="32" height="30"/>
+                                <state key="normal" title="Stop"/>
                                 <connections>
-                                    <action selector="buttonTalkClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xna-Aq-fkk"/>
+                                    <action selector="buttonStopClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ZM-gM-U6T"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="gjD-J0-wup" secondAttribute="leading" id="30R-P6-eNl"/>
+                            <constraint firstItem="MWK-yx-dEY" firstAttribute="centerY" secondItem="oM6-8D-WQ0" secondAttribute="centerY" id="5VC-Qh-Pjw"/>
                             <constraint firstItem="oM6-8D-WQ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="A76-fA-2cg"/>
                             <constraint firstItem="oM6-8D-WQ0" firstAttribute="baseline" secondItem="dyI-aW-Is4" secondAttribute="baseline" id="Fva-oS-GTL"/>
                             <constraint firstItem="gjD-J0-wup" firstAttribute="top" secondItem="oM6-8D-WQ0" secondAttribute="bottom" constant="17" id="GyH-12-ALD"/>
                             <constraint firstAttribute="bottom" secondItem="gjD-J0-wup" secondAttribute="bottom" constant="20" symbolic="YES" id="SDn-8m-dor"/>
                             <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="UHv-dY-GCE"/>
                             <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="gjD-J0-wup" secondAttribute="trailing" id="WBt-3v-J3w"/>
+                            <constraint firstItem="MWK-yx-dEY" firstAttribute="leading" secondItem="oM6-8D-WQ0" secondAttribute="trailing" constant="29" id="ija-d4-v9l"/>
                             <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="pXc-0j-iYJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
