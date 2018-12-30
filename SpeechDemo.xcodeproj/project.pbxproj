@@ -22,6 +22,7 @@
 		AFDA93B721D90D2A00636319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFDA93BA21D90D2A00636319 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFDA93BC21D90D2A00636319 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFDA93C221D9121700636319 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +39,7 @@
 		AFDA93A421D90D2900636319 = {
 			isa = PBXGroup;
 			children = (
+				AFDA93C221D9121700636319 /* README.md */,
 				AFDA93AF21D90D2900636319 /* SpeechDemo */,
 				AFDA93AE21D90D2900636319 /* Products */,
 			);
