@@ -16,7 +16,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var buttonClear: UIButton!
     
     let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     var request:SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
@@ -52,6 +52,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     @IBAction func buttonStopClicked(_ sender: Any) {
+        request?.endAudio()
         stopListening()
     }
     
@@ -87,23 +88,17 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         // Stop the pervious session if it is still running.
         stopListening()
-
+        
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setCategory(.record, mode: .measurement, options: .mixWithOthers)
+            try audioSession.setCategory(.record, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])
             try audioSession.setMode(.measurement)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
         } catch  {
-            debugPrint("Audio session initialization error: \(error)")
+            debugPrint("Audio session initialization error: \(error.localizedDescription)")
         }
-
-        request = SFSpeechAudioBufferRecognitionRequest()
-        guard let request = request else {
-            return
-        }
-        request.shouldReportPartialResults = true
-
+        
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
         audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, time) in
             self.request?.append(buffer)
@@ -117,6 +112,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             debugPrint("Error: \(error)")
         }
         
+        request = SFSpeechAudioBufferRecognitionRequest()
+        guard let request = request else {
+            stopListening()
+            return
+        }
+        request.shouldReportPartialResults = true
+
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
             var isFinal = false
             
@@ -133,8 +135,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func stopListening() {
         debugPrint("\(#function)")
+
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
+
         recognitionTask?.cancel()
         recognitionTask = nil
         request = nil
