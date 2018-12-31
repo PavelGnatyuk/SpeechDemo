@@ -90,8 +90,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         stopListening()
         
         let audioSession = AVAudioSession.sharedInstance()
+        
         do {
-            try audioSession.setCategory(.record, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])
+            try audioSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])
             try audioSession.setMode(.measurement)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
@@ -102,14 +103,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         let recordingFormat = audioEngine.inputNode.outputFormat(forBus: 0)
         audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, time) in
             self.request?.append(buffer)
-        }
-
-        audioEngine.prepare()
-        do {
-            try audioEngine.start()
-        }
-        catch {
-            debugPrint("Error: \(error)")
         }
         
         request = SFSpeechAudioBufferRecognitionRequest()
@@ -131,6 +124,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.stopListening()
             }
         })
+        
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        }
+        catch {
+            debugPrint("Error: \(error)")
+        }
     }
     
     func stopListening() {

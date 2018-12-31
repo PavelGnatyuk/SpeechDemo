@@ -13,18 +13,15 @@ The app is a simplem demo for the speech recognition:
 3. [Using the Speech Recognition API in iOS 10](https://code.tutsplus.com/tutorials/using-the-speech-recognition-api-in-ios-10--cms-28032)
 
 ### Notes
-1. The app works much better with:
+ The app works much better with:
 
 ```SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))```
 
-instead of
+and 
 
-```SFSpeechRecognizer? = SFSpeechRecognizer()```
+```try audioSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])```
 
-2. Audio session is initilized so:
-```try audioSession.setCategory(.record, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])```
-
-3. An error with initialization of the Audio session:
+The last lien fixes the strange error:
 
 `2018-12-31 07:13:50.498942+0200 SpeechDemo[6772:2783016] [avas] AVAudioSessionPortImpl.mm:56:ValidateRequiredFields: Unknown selected data source for Port Receiver (type: Receiver)`
 
