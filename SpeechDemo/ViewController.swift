@@ -16,13 +16,18 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var buttonClear: UIButton!
     
     let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     var request:SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.buttonTalk.isEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         speechRecognizer?.delegate = self
         
         switch SFSpeechRecognizer.authorizationStatus() {
@@ -35,7 +40,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         case .denied, .restricted:
             self.buttonTalk.isEnabled = false
         }
-        
     }
 
     @IBAction func buttonClearClicked(_ sender: Any) {
@@ -80,6 +84,20 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func startListening() {
         debugPrint("\(#function)")
+        
+        // Stop the pervious session if it is still running.
+        stopListening()
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .mixWithOthers)
+            try audioSession.setMode(.measurement)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+
+        } catch  {
+            debugPrint("Audio session initialization error: \(error)")
+        }
+
         request = SFSpeechAudioBufferRecognitionRequest()
         guard let request = request else {
             return
@@ -102,9 +120,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
             var isFinal = false
             
-            if result != nil {
-                self.textView.text = result?.bestTranscription.formattedString
-                isFinal = (result?.isFinal)!
+            if let result = result {
+                self.textView.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
             }
             
             if error != nil || isFinal {
@@ -117,7 +135,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         debugPrint("\(#function)")
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
+        recognitionTask?.cancel()
         recognitionTask = nil
+        request = nil
     }
 }
 
