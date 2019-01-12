@@ -26,7 +26,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-J0-wup">
-                                <rect key="frame" x="16" y="93" width="343" height="554"/>
+                                <rect key="frame" x="16" y="147" width="343" height="500"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES"/>
@@ -41,8 +41,20 @@
                                     <action selector="buttonClearClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LTZ-R7-qy3"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gA5-S0-UYJ">
+                                <rect key="frame" x="122" y="98" width="237" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGA-5k-OaX">
+                                <rect key="frame" x="16" y="102.5" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWK-yx-dEY">
-                                <rect key="frame" x="75" y="46" width="32" height="30"/>
+                                <rect key="frame" x="171.5" y="46" width="32" height="30"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="buttonStopClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ZM-gM-U6T"/>
@@ -51,22 +63,28 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="gjD-J0-wup" secondAttribute="leading" id="30R-P6-eNl"/>
-                            <constraint firstItem="MWK-yx-dEY" firstAttribute="centerY" secondItem="oM6-8D-WQ0" secondAttribute="centerY" id="5VC-Qh-Pjw"/>
-                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="A76-fA-2cg"/>
-                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="baseline" secondItem="dyI-aW-Is4" secondAttribute="baseline" id="Fva-oS-GTL"/>
-                            <constraint firstItem="gjD-J0-wup" firstAttribute="top" secondItem="oM6-8D-WQ0" secondAttribute="bottom" constant="17" id="GyH-12-ALD"/>
-                            <constraint firstAttribute="bottom" secondItem="gjD-J0-wup" secondAttribute="bottom" constant="20" symbolic="YES" id="SDn-8m-dor"/>
-                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="UHv-dY-GCE"/>
-                            <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="gjD-J0-wup" secondAttribute="trailing" id="WBt-3v-J3w"/>
-                            <constraint firstItem="MWK-yx-dEY" firstAttribute="leading" secondItem="oM6-8D-WQ0" secondAttribute="trailing" constant="29" id="ija-d4-v9l"/>
-                            <constraint firstItem="dyI-aW-Is4" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="pXc-0j-iYJ"/>
+                            <constraint firstItem="gjD-J0-wup" firstAttribute="trailing" secondItem="gA5-S0-UYJ" secondAttribute="trailing" id="7yO-rZ-JT2"/>
+                            <constraint firstItem="gA5-S0-UYJ" firstAttribute="top" secondItem="oM6-8D-WQ0" secondAttribute="bottom" constant="22" id="AkO-Qc-xxw"/>
+                            <constraint firstItem="gjD-J0-wup" firstAttribute="top" secondItem="gA5-S0-UYJ" secondAttribute="bottom" constant="19" id="DUE-lM-xAE"/>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="FSV-BN-nKs"/>
+                            <constraint firstItem="oM6-8D-WQ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="HZ9-zL-XQ1"/>
+                            <constraint firstItem="VGA-5k-OaX" firstAttribute="leading" secondItem="oM6-8D-WQ0" secondAttribute="leading" id="KMT-Nb-sv4"/>
+                            <constraint firstItem="dyI-aW-Is4" firstAttribute="centerY" secondItem="MWK-yx-dEY" secondAttribute="centerY" id="NZq-PE-rIq"/>
+                            <constraint firstItem="VGA-5k-OaX" firstAttribute="centerY" secondItem="gA5-S0-UYJ" secondAttribute="centerY" id="OYQ-Xm-6ig"/>
+                            <constraint firstItem="MWK-yx-dEY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fpC-dm-AS5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dyI-aW-Is4" secondAttribute="trailing" constant="16" id="hek-p6-ovz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gjD-J0-wup" secondAttribute="bottom" constant="20" id="jFr-gX-nmy"/>
+                            <constraint firstItem="gjD-J0-wup" firstAttribute="leading" secondItem="VGA-5k-OaX" secondAttribute="leading" id="kRp-rm-Vt8"/>
+                            <constraint firstItem="gA5-S0-UYJ" firstAttribute="trailing" secondItem="dyI-aW-Is4" secondAttribute="trailing" id="mWQ-9f-3zw"/>
+                            <constraint firstItem="gA5-S0-UYJ" firstAttribute="leading" secondItem="VGA-5k-OaX" secondAttribute="trailing" constant="25" id="pez-Bk-Us3"/>
+                            <constraint firstItem="MWK-yx-dEY" firstAttribute="centerY" secondItem="oM6-8D-WQ0" secondAttribute="centerY" id="vDi-Yr-TJ0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="buttonClear" destination="dyI-aW-Is4" id="7SK-fN-vwE"/>
                         <outlet property="buttonTalk" destination="oM6-8D-WQ0" id="j3H-ZT-u9s"/>
+                        <outlet property="textFieldLanguage" destination="gA5-S0-UYJ" id="YwQ-f6-OGN"/>
                         <outlet property="textView" destination="gjD-J0-wup" id="gEY-BU-UG2"/>
                     </connections>
                 </viewController>

@@ -9,26 +9,37 @@
 import UIKit
 import Speech
 
-class ViewController: UIViewController, SFSpeechRecognizerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var buttonTalk: UIButton!
     @IBOutlet weak var buttonClear: UIButton!
+    @IBOutlet weak var textFieldLanguage: UITextField!
     
     let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    
+    var speechRecognizer: SFSpeechRecognizer?
     var request:SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     
+    var language: String {
+        var language: String = Locale.preferredLanguages.first ?? ""
+        if let current = textFieldLanguage.textInputMode?.primaryLanguage {
+            language = current
+        }
+        return language
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardTypeDidChange(notification:)), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
 
-        self.buttonTalk.isEnabled = false
+        buttonTalk.isEnabled = false
+        textFieldLanguage.text = language
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        speechRecognizer?.delegate = self
         
         switch SFSpeechRecognizer.authorizationStatus() {
         case .notDetermined:
@@ -68,21 +79,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
     }
-    
-    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-        debugPrint("Available: \(available)")
-        
-        if !available {
-            let alert = UIAlertController(title: "There was a problem accessing the recognizer", message: "Please try again later", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            
-            present(alert, animated: true, completion: nil)
-        }
+
+    @objc func keyboardTypeDidChange(notification: Notification) {
+        textFieldLanguage.text = language
     }
-    
+
     func startListening() {
         debugPrint("\(#function)")
         
@@ -112,7 +113,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
         request.shouldReportPartialResults = true
 
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
+        debugPrint("language: \(language)")
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: language))
+        guard let recognizer = speechRecognizer else {
+            assert(false, "Failed to create the speech recognizer")
+            return
+        }
+
+        recognitionTask = recognizer.recognitionTask(with: request, resultHandler: { (result, error) in
             var isFinal = false
             
             if let result = result {
